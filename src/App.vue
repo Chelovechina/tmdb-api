@@ -1,30 +1,36 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <HeaderComponent />
 </template>
 
+<script setup>
+import HeaderComponent from "@/components/HeaderComponent";
+</script>
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+* {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-nav {
-  padding: 30px;
+body {
+  background: #242e34;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  height: 100%;
+}
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.nav__item {
+  text-decoration: none;
+  color: #fff;
+  font-size: 16px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
 }
 </style>
