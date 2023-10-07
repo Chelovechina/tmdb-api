@@ -1,7 +1,10 @@
 <template>
   <div class="container">
     <LoaderComponent v-if="store.state.status === 'loading'" />
-    <div v-else>Home</div>
+    <div v-else>
+      Home
+      <SliderComponent />
+    </div>
   </div>
 </template>
 
@@ -9,6 +12,7 @@
 import { onMounted } from "vue";
 import { useStore } from "vuex";
 import LoaderComponent from "./../components/LoaderComponent.vue";
+import SliderComponent from "./../components/SliderComponent.vue";
 
 const store = useStore();
 
