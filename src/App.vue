@@ -1,9 +1,14 @@
 <template>
   <HeaderComponent />
+  <main class="main">
+    <router-view> </router-view>
+  </main>
+  <FooterComponent />
 </template>
 
 <script setup>
-import HeaderComponent from "@/components/HeaderComponent";
+import HeaderComponent from "./components/HeaderComponent.vue";
+import FooterComponent from "./components/FooterComponent.vue";
 </script>
 
 <style lang="scss">
@@ -16,6 +21,16 @@ import HeaderComponent from "@/components/HeaderComponent";
 
 body {
   background: #242e34;
+}
+
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  height: 100%;
 }
 
 .container {
