@@ -1,10 +1,12 @@
 <template>
-  <div class="slide" :style="{ backgroundImage: 'url(' + imageUrl + ')' }">
-    <div class="slide__description">
-      <h4 class="slide__title">{{ slide.title }}</h4>
-      <p class="slide__overview">{{ slide.overview }}</p>
+  <router-link :to="`/movie/${slide.id}`" class="slide__link">
+    <div class="slide" :style="{ backgroundImage: 'url(' + imageUrl + ')' }">
+      <div class="slide__description">
+        <h4 class="slide__title">{{ slide.title }}</h4>
+        <p class="slide__overview">{{ slide.overview }}</p>
+      </div>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script setup>
@@ -27,6 +29,10 @@ const imageUrl = `https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/${sl
   align-items: center;
   padding: 30px 0;
   flex-direction: column;
+
+  &__link {
+    text-decoration: none;
+  }
 
   &::before {
     content: "";

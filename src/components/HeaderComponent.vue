@@ -24,10 +24,15 @@ const store = useStore();
 
 <style lang="scss" scoped>
 .header {
+  position: fixed;
+  top: 0;
+  width: 100%;
   background: #0d253f;
   padding: 0 20px;
   height: 60px;
+  z-index: 100;
 }
+
 .nav {
   display: flex;
   justify-content: space-between;

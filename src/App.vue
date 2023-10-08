@@ -31,6 +31,7 @@ body {
 
 .main {
   flex: 1 0 0;
+  padding-top: 60px;
 }
 
 .container {
@@ -47,5 +48,13 @@ body {
   display: flex;
   align-items: center;
   font-weight: 500;
+}
+
+.title {
+  color: #fff;
+  font-size: 32px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
 }
 </style>
