@@ -24,14 +24,14 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
+import { onBeforeMount } from "vue";
 import { useStore } from "vuex";
 import LoaderComponent from "./../components/LoaderComponent.vue";
 import SliderComponent from "./../components/SliderComponent.vue";
 
 const store = useStore();
 
-onMounted(() => {
+onBeforeMount(() => {
   store.dispatch("getPopularMovies");
 });
 </script>

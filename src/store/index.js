@@ -4,6 +4,7 @@ import navRoutesModule from "./navRoutesModule";
 
 export default createStore({
   state: {
+    currentMovie: null,
     content: {},
     status: "loading",
     errorMessage: null,
@@ -19,15 +20,29 @@ export default createStore({
     setContentState: (state, data) => {
       state.content = data;
     },
+    setCurrentMovie: (state, movie) => {
+      state.currentMovie = movie;
+    },
   },
   actions: {
     getPopularMovies: async ({ commit }) => {
       try {
         commit("setStatus", "loading");
-        const response = await api.get(
-          "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1"
-        );
+        const response = await api.get("/movie/popular?language=en-US&page=1");
         commit("setContentState", response.data);
+        commit("setStatus", "fullfilled");
+      } catch (e) {
+        commit("setStatus", "error");
+        commit("setErrorMessage", e);
+      }
+    },
+    getSingleMovie: async ({ commit }, id) => {
+      try {
+        commit("setStatus", "loading");
+        const response = await api.get(
+          `/movie/${id}?append_to_response=credits,videos&language=en-US`
+        );
+        commit("setCurrentMovie", response.data);
         commit("setStatus", "fullfilled");
       } catch (e) {
         commit("setStatus", "error");
