@@ -2,6 +2,9 @@
   <LoaderComponent v-if="store.state.status === 'loading'" />
   <div v-else>
     <MovieBanner :movie="store.state.currentMovie" />
+    <div class="container wrapper">
+      <AsideInfo />
+    </div>
   </div>
 </template>
 
@@ -12,6 +15,7 @@ import { useStore } from "vuex";
 
 import LoaderComponent from "./../components/LoaderComponent.vue";
 import MovieBanner from "../components/MovieBanner.vue";
+import AsideInfo from "../components/AsideInfo.vue";
 
 const store = useStore();
 const route = useRoute();
@@ -21,4 +25,10 @@ onBeforeMount(() => {
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.wrapper {
+  display: flex;
+  padding: 40px 0;
+  justify-content: space-between;
+}
+</style>

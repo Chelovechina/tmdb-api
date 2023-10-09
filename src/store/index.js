@@ -9,7 +9,37 @@ export default createStore({
     status: "loading",
     errorMessage: null,
   },
-  getters: {},
+  getters: {
+    getAsideInfo: (state) => {
+      if (state.currentMovie === null) {
+        return null;
+      }
+
+      const currency = Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+      });
+
+      return [
+        {
+          title: "Original Title",
+          text: state.currentMovie.original_title,
+        },
+        {
+          title: "Status",
+          text: state.currentMovie.status,
+        },
+        {
+          title: "Budget",
+          text: currency.format(state.currentMovie.budget),
+        },
+        {
+          title: "Revenue",
+          text: currency.format(state.currentMovie.revenue),
+        },
+      ];
+    },
+  },
   mutations: {
     setStatus: (state, status) => {
       state.status = status;

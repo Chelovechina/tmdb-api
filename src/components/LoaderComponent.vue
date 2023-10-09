@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="loader-wrapper">
     <div class="lds-ripple">
       <div></div>
       <div></div>
@@ -10,7 +10,7 @@
 <script setup></script>
 
 <style lang="scss" scoped>
-.wrapper {
+.loader-wrapper {
   width: 100%;
   height: 100%;
   display: flex;
