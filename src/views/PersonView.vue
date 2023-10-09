@@ -48,6 +48,7 @@ onBeforeMount(() => {
   display: flex;
   gap: 30px;
   padding: 50px;
+  align-items: center;
 }
 .wrapper {
   display: flex;
