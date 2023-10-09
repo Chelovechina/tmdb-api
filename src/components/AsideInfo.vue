@@ -1,11 +1,7 @@
 <template>
   <aside class="aside">
     <ul class="aside__list">
-      <li
-        v-for="info in $store.getters.getAsideInfo"
-        :key="info.title"
-        class="aside__item"
-      >
+      <li v-for="info in asideInfo" :key="info.title" class="aside__item">
         <h5 class="aside__title">{{ info.title }}</h5>
         <p class="aside__text">{{ info.text }}</p>
       </li>
@@ -13,15 +9,18 @@
   </aside>
 </template>
 
-<script setup></script>
+<script setup>
+const { asideInfo } = defineProps({
+  asideInfo: Array,
+});
+</script>
 
 <style lang="scss" scoped>
 .aside {
-  width: 250px;
-  background: #303b42;
-  border-radius: 10px;
-
   &__list {
+    width: 250px;
+    background: #303b42;
+    border-radius: 10px;
     padding: 20px;
     list-style: none;
     gap: 10px;

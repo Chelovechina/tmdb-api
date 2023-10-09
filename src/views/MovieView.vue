@@ -3,7 +3,8 @@
   <div v-else>
     <MovieBanner :movie="store.state.currentMovie" />
     <div class="container wrapper">
-      <AsideInfo />
+      <AsideInfo :aside-info="store.getters.getAsideInfo" />
+      <CastComponent :cast="store.getters.getMovieCast" />
     </div>
   </div>
 </template>
@@ -16,6 +17,7 @@ import { useStore } from "vuex";
 import LoaderComponent from "./../components/LoaderComponent.vue";
 import MovieBanner from "../components/MovieBanner.vue";
 import AsideInfo from "../components/AsideInfo.vue";
+import CastComponent from "../components/CastComponent.vue";
 
 const store = useStore();
 const route = useRoute();
@@ -29,6 +31,6 @@ onBeforeMount(() => {
 .wrapper {
   display: flex;
   padding: 40px 0;
-  justify-content: space-between;
+  gap: 40px;
 }
 </style>

@@ -10,6 +10,13 @@ export default createStore({
     errorMessage: null,
   },
   getters: {
+    getMovieCast: (state) => {
+      if (state.currentMovie === null) {
+        return null;
+      }
+
+      return state.currentMovie.credits.cast.slice(0, 8);
+    },
     getAsideInfo: (state) => {
       if (state.currentMovie === null) {
         return null;
