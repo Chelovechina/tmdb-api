@@ -1,26 +1,25 @@
 <template>
   <div class="cast">
-    <h3 class="cast__title">Top Billed Cast</h3>
+    <h3 class="cast__title">{{ title }}</h3>
 
     <ul class="cast__list">
       <router-link
-        v-for="person in cast"
-        :key="person.id"
-        :to="`/people/${person.id}`"
+        v-for="cast in casts"
+        :key="cast.id"
+        :to="type === 'person' ? `/movie/${cast.id}` : `/people/${cast.id}`"
         class="cast__link"
       >
         <li class="cast__item item">
           <img
             :src="
-              'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/' +
-              person.profile_path
+              'https://www.themoviedb.org/t/p/w600_and_h900_bestv2' +
+              cast[imgSrc]
             "
-            :alt="person.name"
             class="item__img"
           />
           <div class="item__info">
-            <h5 class="item__title">{{ person.name }}</h5>
-            <p class="item__text">{{ person.character }}</p>
+            <h5 class="item__title">{{ cast.name }} {{ cast.title }}</h5>
+            <p class="item__text">{{ cast.character }}</p>
           </div>
         </li>
       </router-link>
@@ -29,10 +28,16 @@
 </template>
 
 <script setup>
-const { cast } = defineProps({ cast: Array });
+const { casts, type, title } = defineProps({
+  casts: Array,
+  title: String,
+  type: String,
+});
+
+const imgSrc = type === "person" ? "poster_path" : "profile_path";
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .cast {
   color: #fff;
   width: 100%;

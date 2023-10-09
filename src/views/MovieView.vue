@@ -3,8 +3,12 @@
   <div v-else>
     <MovieBanner :movie="store.state.currentMovie" />
     <div class="container wrapper">
-      <AsideInfo :aside-info="store.getters.getAsideInfo" />
-      <CastComponent :cast="store.getters.getMovieCast" />
+      <AsideInfo :aside-info="store.getters.getMovieAside" />
+      <CastComponent
+        title="Top Billed Cast"
+        type="movie"
+        :casts="store.getters.getMovieCast"
+      />
     </div>
   </div>
 </template>

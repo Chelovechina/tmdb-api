@@ -5,22 +5,24 @@ import navRoutesModule from "./navRoutesModule";
 export default createStore({
   state: {
     currentMovie: null,
+    currentPerson: null,
     content: {},
     status: "loading",
     errorMessage: null,
   },
   getters: {
     getMovieCast: (state) => {
-      if (state.currentMovie === null) {
-        return null;
-      }
+      if (state.currentMovie === null) return null;
 
       return state.currentMovie.credits.cast.slice(0, 8);
     },
-    getAsideInfo: (state) => {
-      if (state.currentMovie === null) {
-        return null;
-      }
+    getPersonCast: (state) => {
+      if (state.currentPerson === null) return null;
+
+      return state.currentPerson.credits.cast.slice(0, 8);
+    },
+    getMovieAside: (state) => {
+      if (state.currentMovie === null) return null;
 
       const currency = Intl.NumberFormat("en-US", {
         style: "currency",
@@ -46,6 +48,28 @@ export default createStore({
         },
       ];
     },
+    getPersonAside: (state) => {
+      if (state.currentPerson === null) return null;
+
+      return [
+        {
+          title: "Known For",
+          text: state.currentPerson.known_for_department,
+        },
+        {
+          title: "Gender",
+          text: state.currentPerson.gender,
+        },
+        {
+          title: "Birthday",
+          text: state.currentPerson.birthday,
+        },
+        {
+          title: "Plase Of Birth",
+          text: state.currentPerson.place_of_birth,
+        },
+      ];
+    },
   },
   mutations: {
     setStatus: (state, status) => {
@@ -59,6 +83,9 @@ export default createStore({
     },
     setCurrentMovie: (state, movie) => {
       state.currentMovie = movie;
+    },
+    setCurrentPerson: (state, person) => {
+      state.currentPerson = person;
     },
   },
   actions: {
@@ -80,6 +107,19 @@ export default createStore({
           `/movie/${id}?append_to_response=credits,videos&language=en-US`
         );
         commit("setCurrentMovie", response.data);
+        commit("setStatus", "fullfilled");
+      } catch (e) {
+        commit("setStatus", "error");
+        commit("setErrorMessage", e);
+      }
+    },
+    getPerson: async ({ commit }, id) => {
+      try {
+        commit("setStatus", "loading");
+        const response = await api.get(
+          `/person/${id}?append_to_response=credits&language=en-US`
+        );
+        commit("setCurrentPerson", response.data);
         commit("setStatus", "fullfilled");
       } catch (e) {
         commit("setStatus", "error");

@@ -58,7 +58,7 @@ const toggleTrailer = () => {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .info {
   display: flex;
   flex-direction: column;
