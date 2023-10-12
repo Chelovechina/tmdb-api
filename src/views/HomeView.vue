@@ -32,7 +32,7 @@ import SliderComponent from "./../components/SliderComponent.vue";
 const store = useStore();
 
 onBeforeMount(() => {
-  store.dispatch("getMovies", "top_rated");
+  store.dispatch("getList", "/movie/top_rated");
 });
 </script>
 

@@ -108,13 +108,13 @@ export default createStore({
     },
   },
   actions: {
-    getMovies: async ({ state, commit }, type) => {
+    getList: async ({ state, commit }, type) => {
       try {
         commit("setStatus", "loading");
         let response;
 
         if (state.sort.searchValue === "") {
-          response = await api.get(`/movie/${type}`);
+          response = await api.get(type);
         }
 
         commit("setContentState", response.data);
@@ -128,7 +128,7 @@ export default createStore({
       try {
         commit("setPage", state.content.page + 1);
 
-        const response = await api.get(`/movie/${type}`, {
+        const response = await api.get(type, {
           params: {
             page: state.content.page,
             language: "en-US",

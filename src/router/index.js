@@ -1,6 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import LayoutView from "../views/LayoutView.vue";
+import OnTheAirTVVIew from "../views/OnTheAirTVView.vue";
+import AiringTodayTVView from "../views/AiringTodayTVView.vue";
+import PopularTVView from "../views/PopularTVView.vue";
+import TopRatedTVView from "../views/TopRatedTVView.vue";
 import PopularMovieView from "../views/PopularMovieView.vue";
 import NowPlayingMovieView from "../views/NowPlayingMovieView.vue";
 import UpcomingMovieView from "../views/UpcomingMovieView.vue";
@@ -13,6 +17,42 @@ const routes = [
     path: "/",
     name: "home",
     component: HomeView,
+  },
+  {
+    path: "/tv/on-the-air",
+    name: "onTheAirTV",
+    component: (
+      <LayoutView title="On The Air TV Shows" type="tv">
+        <OnTheAirTVVIew />
+      </LayoutView>
+    ),
+  },
+  {
+    path: "/tv/airing-today",
+    name: "airingTodayTV",
+    component: (
+      <LayoutView title="Airing Today TV Shows" type="tv">
+        <AiringTodayTVView />
+      </LayoutView>
+    ),
+  },
+  {
+    path: "/tv/popular",
+    name: "popularTV",
+    component: (
+      <LayoutView title="Popular TV Shows" type="tv">
+        <PopularTVView />
+      </LayoutView>
+    ),
+  },
+  {
+    path: "/tv/top-rated",
+    name: "topRatedTV",
+    component: (
+      <LayoutView title="Top Rated TV Shows" type="tv">
+        <TopRatedTVView />
+      </LayoutView>
+    ),
   },
   {
     path: "/movies/popular",

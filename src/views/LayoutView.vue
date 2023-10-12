@@ -20,6 +20,7 @@ const store = useStore();
 
 onBeforeMount(() => {
   if (type === "movie") store.dispatch("getMovieGenres");
+  if (type === "tv") store.dispatch("getTVGenres");
 });
 </script>
 

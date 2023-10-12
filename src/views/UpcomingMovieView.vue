@@ -25,10 +25,10 @@ import MoviesList from "@/components/MoviesList.vue";
 const store = useStore();
 
 const cb = () => {
-  store.dispatch("loadMore", "upcoming");
+  store.dispatch("loadMore", "/movie/upcoming");
 };
 
 onBeforeMount(() => {
-  store.dispatch("getMovies", "upcoming");
+  store.dispatch("getList", "/movie/upcoming");
 });
 </script>

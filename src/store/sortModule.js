@@ -38,7 +38,20 @@ export default {
   actions: {
     getMovieGenres: async ({ commit }) => {
       try {
-        const response = await api.get("genre/movie/list?language=en");
+        const response = await api.get("genre/movie/list", {
+          params: { language: "en" },
+        });
+        commit("setGenres", response.data.genres);
+      } catch (e) {
+        commit("setStatus", "error");
+        commit("setErrorMessage", e);
+      }
+    },
+    getTVGenres: async ({ commit }) => {
+      try {
+        const response = await api.get("genre/tv/list", {
+          params: { language: "en" },
+        });
         commit("setGenres", response.data.genres);
       } catch (e) {
         commit("setStatus", "error");

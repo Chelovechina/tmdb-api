@@ -18,12 +18,12 @@ export default {
     tv: [
       { title: "Popular", to: "/tv/popular" },
       {
-        title: "Now Playing",
-        to: "/tv/now-playing",
+        title: "On The Air",
+        to: "/tv/on-the-air",
       },
       {
-        title: "Upcoming",
-        to: "/tv/upcoming",
+        title: "Airing Today",
+        to: "/tv/airing-today",
       },
       {
         title: "Top Rated",

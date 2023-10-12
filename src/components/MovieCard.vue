@@ -9,7 +9,7 @@
     />
 
     <div class="movie__info">
-      <h4 class="movie__title">{{ movie.title }}</h4>
+      <h4 class="movie__title">{{ movie.title || movie.name }}</h4>
       <p class="movie__date">{{ movie.release_date }}</p>
 
       <div class="movie__rating">
