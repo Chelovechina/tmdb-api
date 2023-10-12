@@ -1,6 +1,7 @@
 import { createStore } from "vuex";
 import { api } from "@/api";
 import navRoutesModule from "./navRoutesModule";
+import sortModule from "./sortModule";
 
 export default createStore({
   state: {
@@ -14,12 +15,24 @@ export default createStore({
     getMovieCast: (state) => {
       if (state.currentMovie === null) return null;
 
-      return state.currentMovie.credits.cast.slice(0, 8);
+      const result = state.currentMovie.credits.cast.filter((cast) => {
+        if (cast.profile_path !== null) {
+          return cast;
+        }
+      });
+
+      return result;
     },
     getPersonCast: (state) => {
       if (state.currentPerson === null) return null;
 
-      return state.currentPerson.credits.cast.slice(0, 8);
+      const result = state.currentPerson.credits.cast.filter((cast) => {
+        if (cast.poster_path !== null) {
+          return cast;
+        }
+      });
+
+      return result;
     },
     getMovieAside: (state) => {
       if (state.currentMovie === null) return null;
@@ -58,7 +71,7 @@ export default createStore({
         },
         {
           title: "Gender",
-          text: state.currentPerson.gender,
+          text: state.currentPerson.gender === 1 ? "Female" : "Male",
         },
         {
           title: "Birthday",
@@ -81,6 +94,12 @@ export default createStore({
     setContentState: (state, data) => {
       state.content = data;
     },
+    setPage: (state, page) => {
+      state.content.page = page;
+    },
+    addMoreMovies: (state, movies) => {
+      state.content.results = [...state.content.results, ...movies];
+    },
     setCurrentMovie: (state, movie) => {
       state.currentMovie = movie;
     },
@@ -89,10 +108,15 @@ export default createStore({
     },
   },
   actions: {
-    getPopularMovies: async ({ commit }) => {
+    getMovies: async ({ state, commit }, type) => {
       try {
         commit("setStatus", "loading");
-        const response = await api.get("/movie/popular?language=en-US&page=1");
+        let response;
+
+        if (state.sort.searchValue === "") {
+          response = await api.get(`/movie/${type}`);
+        }
+
         commit("setContentState", response.data);
         commit("setStatus", "fullfilled");
       } catch (e) {
@@ -100,12 +124,35 @@ export default createStore({
         commit("setErrorMessage", e);
       }
     },
+    loadMore: async ({ state, commit }, type) => {
+      try {
+        commit("setPage", state.content.page + 1);
+
+        const response = await api.get(`/movie/${type}`, {
+          params: {
+            page: state.content.page,
+            language: "en-US",
+          },
+        });
+
+        commit("addMoreMovies", response.data.results);
+        commit("setStatus", "fullfilled");
+      } catch (e) {
+        commit("setStatus", "error");
+        console.log(e);
+        commit("setErrorMessage", e);
+      }
+    },
     getSingleMovie: async ({ commit }, id) => {
       try {
         commit("setStatus", "loading");
-        const response = await api.get(
-          `/movie/${id}?append_to_response=credits,videos&language=en-US`
-        );
+
+        const response = await api.get(`/movie/${id}`, {
+          params: {
+            append_to_response: "credits,videos",
+          },
+        });
+
         commit("setCurrentMovie", response.data);
         commit("setStatus", "fullfilled");
       } catch (e) {
@@ -129,5 +176,6 @@ export default createStore({
   },
   modules: {
     navRoutes: navRoutesModule,
+    sort: sortModule,
   },
 });

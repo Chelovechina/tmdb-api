@@ -57,4 +57,16 @@ body {
   text-transform: uppercase;
   text-align: center;
 }
+
+.movies {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.sort__title {
+  color: #fff;
+  font-size: 14px;
+}
 </style>

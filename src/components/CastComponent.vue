@@ -3,20 +3,12 @@
     <h3 class="cast__title">{{ title }}</h3>
 
     <ul class="cast__list">
-      <router-link
-        v-for="cast in casts"
-        :key="cast.id"
-        :to="type === 'person' ? `/movie/${cast.id}` : `/people/${cast.id}`"
-        class="cast__link"
-      >
+      <router-link v-for="cast in casts" :key="cast.id"
+        :to="type === 'person' ? `/movies/${cast.id}` : `/people/${cast.id}`" class="cast__link">
         <li class="cast__item item">
-          <img
-            :src="
-              'https://www.themoviedb.org/t/p/w600_and_h900_bestv2' +
-              cast[imgSrc]
-            "
-            class="item__img"
-          />
+          <img :src="'https://www.themoviedb.org/t/p/w600_and_h900_bestv2' +
+            cast[imgSrc]
+            " class="item__img" />
           <div class="item__info">
             <h5 class="item__title">{{ cast.name }} {{ cast.title }}</h5>
             <p class="item__text">{{ cast.character }}</p>
@@ -37,7 +29,7 @@ const { casts, type, title } = defineProps({
 const imgSrc = type === "person" ? "poster_path" : "profile_path";
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .cast {
   color: #fff;
   width: 100%;

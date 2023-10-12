@@ -1,10 +1,44 @@
 <template>
-  <div>
-    Layout
-    <slot></slot>
+  <div class="container layout">
+    <h1 class="layout__title">{{ title }}</h1>
+
+    <div class="layout__wrapper">
+      <SortComponent />
+      <slot></slot>
+    </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { onBeforeMount } from "vue";
+import { useStore } from "vuex";
 
-<style lang="scss" scoped></style>
+import SortComponent from "./../components/SortComponent.vue";
+
+const { title, type } = defineProps({ title: String, type: String });
+const store = useStore();
+
+onBeforeMount(() => {
+  if (type === "movie") store.dispatch("getMovieGenres");
+});
+</script>
+
+<style lang="scss" scoped>
+.layout {
+  padding: 40px 0;
+
+  &__title {
+    color: #fff;
+    font-size: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  &__wrapper {
+    display: flex;
+    gap: 30px;
+  }
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="`/movie/${slide.id}`" class="slide__link">
+  <router-link :to="`/movies/${slide.id}`" class="slide__link">
     <div class="slide" :style="{ backgroundImage: 'url(' + imageUrl + ')' }">
       <div class="slide__description">
         <h4 class="slide__title">{{ slide.title }}</h4>
