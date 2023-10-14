@@ -2,11 +2,11 @@
   <ul class="list">
     <router-link
       v-for="item in store.state.content.results"
-      :to="'/movies/' + item.id"
+      :to="url + item.id"
       :key="item.id"
       class="link"
     >
-      <MovieCard :movie="item" />
+      <ContentCard :item="item" />
     </router-link>
   </ul>
 </template>
@@ -14,8 +14,12 @@
 <script setup>
 import { useStore } from "vuex";
 
-import MovieCard from "./MovieCard.vue";
+import ContentCard from "./ContentCard.vue";
 
+const { type } = defineProps({
+  type: String,
+});
+const url = type === "tv" ? "/tv/" : "/movies/";
 const store = useStore();
 </script>
 

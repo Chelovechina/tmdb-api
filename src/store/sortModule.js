@@ -49,7 +49,7 @@ export default {
     },
     getTVGenres: async ({ commit }) => {
       try {
-        const response = await api.get("genre/tv/list", {
+        const response = await api.get("genre/movie/list", {
           params: { language: "en" },
         });
         commit("setGenres", response.data.genres);

@@ -69,4 +69,25 @@ body {
   color: #fff;
   font-size: 14px;
 }
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &-rating {
+    width: 300px;
+  }
+
+  &__rating {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__title {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+  }
+}
 </style>

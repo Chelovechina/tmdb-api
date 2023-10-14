@@ -1,20 +1,31 @@
 <template>
   <LoaderComponent v-if="store.state.status === 'loading'" />
+
   <div v-else>
-    <div class="banner" :style="{
-      backgroundImage:
-        'url(' + url + store.state.currentMovie.backdrop_path + ')',
-    }">
+    <div
+      class="banner"
+      :style="{
+        backgroundImage:
+          'url(' + url + store.state.currentTV.backdrop_path + ')',
+      }"
+    >
       <div class="container banner__wrapper">
-        <ItemPoster :image-url="'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/' +
-          store.state.currentMovie.poster_path
-          " />
-        <MovieInfo :item="store.state.currentMovie" />
+        <ItemPoster
+          :image-url="
+            'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/' +
+            store.state.currentTV.poster_path
+          "
+        />
+        <TVInfo :item="store.state.currentTV" />
       </div>
     </div>
     <div class="container wrapper">
-      <AsideInfo :aside-info="store.getters.getMovieAside" />
-      <CastComponent title="Top Billed Cast" type="movie" :casts="store.getters.getTVCast" />
+      <AsideInfo :aside-info="store.getters.getTVAside" />
+      <CastComponent
+        title="Top Billed Cast"
+        type="tv"
+        :casts="store.getters.getTVCast"
+      />
     </div>
   </div>
 </template>
@@ -28,7 +39,7 @@ import LoaderComponent from "./../components/LoaderComponent.vue";
 import ItemPoster from "../components/UI/ItemPoster.vue";
 import AsideInfo from "../components/AsideInfo.vue";
 import CastComponent from "../components/CastComponent.vue";
-import MovieInfo from "@/components/MovieInfo.vue";
+import TVInfo from "../components/TVInfo.vue";
 
 const store = useStore();
 const route = useRoute();
@@ -36,7 +47,7 @@ const route = useRoute();
 const url = "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces";
 
 onBeforeMount(() => {
-  store.dispatch("getSingle", { type: "movie", id: route.params.id });
+  store.dispatch("getSingle", { type: "tv", id: route.params.id });
 });
 </script>
 

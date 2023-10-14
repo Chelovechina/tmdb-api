@@ -2,22 +2,24 @@
   <li class="movie__item">
     <img
       :src="
-        'https://image.tmdb.org/t/p/w600_and_h900_bestv2/' + movie.poster_path
+        'https://image.tmdb.org/t/p/w600_and_h900_bestv2/' + item.poster_path
       "
-      :alt="movie.title"
+      :alt="item.title"
       class="movie__img"
     />
 
     <div class="movie__info">
-      <h4 class="movie__title">{{ movie.title || movie.name }}</h4>
-      <p class="movie__date">{{ movie.release_date }}</p>
+      <h4 class="movie__title">{{ item.title || item.name }}</h4>
+      <p class="movie__date">
+        {{ item.release_date || item.first_air_date }}
+      </p>
 
       <div class="movie__rating">
         <h4 class="movie__title">Rating</h4>
-        <h4 class="movie__title">{{ movie.vote_average.toFixed(1) }}</h4>
+        <h4 class="movie__title">{{ item.vote_average.toFixed(1) }}</h4>
       </div>
 
-      <ProgressBar :width="movie.vote_average" />
+      <ProgressBar :width="item.vote_average" />
     </div>
   </li>
 </template>
@@ -25,7 +27,7 @@
 <script setup>
 import ProgressBar from "./UI/ProgressBar.vue";
 
-const { movie } = defineProps({ movie: Object });
+const { item } = defineProps({ item: Object });
 </script>
 
 <style lang="scss" scoped>

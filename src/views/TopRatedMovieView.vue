@@ -2,7 +2,7 @@
   <LoaderComponent v-if="store.state.status === 'loading'" />
 
   <div v-else class="movies">
-    <MoviesList />
+    <ContentsList type="movie" />
 
     <div
       v-intersection="{
@@ -20,7 +20,7 @@ import { onBeforeMount } from "vue";
 import { useStore } from "vuex";
 
 import LoaderComponent from "@/components/LoaderComponent.vue";
-import MoviesList from "@/components/MoviesList.vue";
+import ContentsList from "@/components/ContentsList.vue";
 
 const store = useStore();
 

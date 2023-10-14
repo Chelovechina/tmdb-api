@@ -1,9 +1,9 @@
 <template>
   <div class="info">
     <div class="info__block block">
-      <h1 class="info__title">{{ item.title }}</h1>
+      <h1 class="info__title">{{ item.name }}</h1>
       <p class="info__created">
-        {{ item.release_date }} ({{ item.production_countries[0].name }})
+        {{ item.first_air_date }} ({{ item.production_countries[0].name }})
       </p>
       <p class="info__genres">
         <SpanList :genres="item.genres" />
@@ -17,20 +17,10 @@
       <ProgressBar :width="item.vote_average" />
     </div>
     <InfoBlock title="Overview" :text="item.overview" />
-    <InfoBlock :title="director.name" text="Director" />
-    <button @click="toggleTrailer" class="info__btn">Play Trailer</button>
-    <TrailerPlayer
-      :isActive="isActive"
-      :videoUrl="videoUrl"
-      :handleClick="toggleTrailer"
-    />
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
-
-import TrailerPlayer from "./TrailerPlayer.vue";
 import SpanList from "./UI/SpanList.vue";
 import ProgressBar from "./UI/ProgressBar.vue";
 import InfoBlock from "./UI/InfoBlock.vue";
@@ -38,15 +28,6 @@ import InfoBlock from "./UI/InfoBlock.vue";
 const { item } = defineProps({
   item: Object,
 });
-
-const director = item.credits.crew.find((person) => person.job === "Director");
-const video = item.videos.results.find((video) => video.type === "Trailer");
-const videoUrl = `https://www.youtube.com/embed/${video.key}`;
-const isActive = ref(false);
-
-const toggleTrailer = () => {
-  isActive.value = !isActive.value;
-};
 </script>
 
 <style lang="scss">

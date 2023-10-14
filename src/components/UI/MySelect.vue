@@ -1,10 +1,6 @@
 <template>
   <p class="sort__title">{{ title }}:</p>
-  <select
-    @change="handleChange"
-    :value="store.state.sort.activeSort"
-    class="sort__select"
-  >
+  <select @change="handleChange" :value="store.state.sort.activeSort" class="sort__select">
     <option v-for="sort in sortBy" :key="sort.value" :value="sort.value">
       {{ sort.title }}
     </option>
@@ -22,7 +18,7 @@ const store = useStore();
 const sortBy = store.state.sort?.sortBy;
 
 const handleChange = (e) => {
-  store.commit("setSearchValue", e.target.value);
+  store.commit("setActiveSort", e.target.value);
 };
 </script>
 

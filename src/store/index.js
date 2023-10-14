@@ -6,12 +6,24 @@ import sortModule from "./sortModule";
 export default createStore({
   state: {
     currentMovie: null,
+    currentTV: null,
     currentPerson: null,
     content: {},
     status: "loading",
     errorMessage: null,
   },
   getters: {
+    getTVCast: (state) => {
+      if (state.currentTV === null) return null;
+
+      const result = state.currentTV.credits.cast.filter((cast) => {
+        if (cast.profile_path !== null) {
+          return cast;
+        }
+      });
+
+      return result;
+    },
     getMovieCast: (state) => {
       if (state.currentMovie === null) return null;
 
@@ -33,6 +45,28 @@ export default createStore({
       });
 
       return result;
+    },
+    getTVAside: (state) => {
+      if (state.currentTV === null) return null;
+
+      return [
+        {
+          title: "Original Name",
+          text: state.currentTV.original_name,
+        },
+        {
+          title: "Status",
+          text: state.currentTV.status,
+        },
+        {
+          title: "Last Air Date",
+          text: state.currentTV.last_air_date,
+        },
+        {
+          title: "Number Of Episodes",
+          text: state.currentTV.number_of_episodes,
+        },
+      ];
     },
     getMovieAside: (state) => {
       if (state.currentMovie === null) return null;
@@ -103,6 +137,9 @@ export default createStore({
     setCurrentMovie: (state, movie) => {
       state.currentMovie = movie;
     },
+    setCurrentTV: (state, tv) => {
+      state.currentTV = tv;
+    },
     setCurrentPerson: (state, person) => {
       state.currentPerson = person;
     },
@@ -143,17 +180,19 @@ export default createStore({
         commit("setErrorMessage", e);
       }
     },
-    getSingleMovie: async ({ commit }, id) => {
+    getSingle: async ({ commit }, { type, id }) => {
       try {
         commit("setStatus", "loading");
 
-        const response = await api.get(`/movie/${id}`, {
+        const response = await api.get(`/${type}/${id}`, {
           params: {
             append_to_response: "credits,videos",
           },
         });
 
-        commit("setCurrentMovie", response.data);
+        type === "movie"
+          ? commit("setCurrentMovie", response.data)
+          : commit("setCurrentTV", response.data);
         commit("setStatus", "fullfilled");
       } catch (e) {
         commit("setStatus", "error");

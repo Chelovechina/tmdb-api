@@ -2,7 +2,7 @@
   <LoaderComponent v-if="store.state.status === 'loading'" />
   <div v-else>
     <div class="container banner__wrapper">
-      <PosterComponent
+      <ItemPoster
         :image-url="
           'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/' +
           store.state.currentPerson.profile_path
@@ -30,7 +30,7 @@ import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 
 import LoaderComponent from "./../components/LoaderComponent.vue";
-import PosterComponent from "./../components/PosterComponent.vue";
+import ItemPoster from "./../components/UI/ItemPoster.vue";
 import PersonInfo from "./../components/PersonInfo.vue";
 import AsideInfo from "./../components/AsideInfo.vue";
 import CastComponent from "../components/CastComponent.vue";
@@ -50,6 +50,7 @@ onBeforeMount(() => {
   padding: 50px;
   align-items: center;
 }
+
 .wrapper {
   display: flex;
   padding: 40px 0;

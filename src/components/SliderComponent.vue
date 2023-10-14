@@ -4,19 +4,30 @@
       <img src="./../assets/arrow-left-solid.svg" alt="left" class="btn__img" />
     </button>
     <div class="slider__wrapper">
-      <div class="slider" :style="{ marginLeft: '-' + 100 * currentSlideIndex + '%' }">
-        <SliderItem v-for="slide in sliderList" :key="slide.id" :slide="slide" />
+      <div
+        class="slider"
+        :style="{ marginLeft: '-' + 100 * currentSlideIndex + '%' }"
+      >
+        <SliderItem
+          v-for="slide in sliderList"
+          :key="slide.id"
+          :slide="slide"
+        />
       </div>
     </div>
     <button @click="nextSlide" class="btn">
-      <img src="./../assets/arrow-right-solid.svg" alt="right" class="btn__img" />
+      <img
+        src="./../assets/arrow-right-solid.svg"
+        alt="right"
+        class="btn__img"
+      />
     </button>
   </div>
 </template>
 
 <script setup>
 import { useStore } from "vuex";
-import SliderItem from "./SliderItem.vue";
+import SliderItem from "./UI/SliderItem.vue";
 import { ref } from "vue";
 
 const store = useStore();
