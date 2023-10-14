@@ -9,6 +9,7 @@ import PopularMovieView from "../views/PopularMovieView.vue";
 import NowPlayingMovieView from "../views/NowPlayingMovieView.vue";
 import UpcomingMovieView from "../views/UpcomingMovieView.vue";
 import TopRatedMovieView from "../views/TopRatedMovieView.vue";
+import PeopleView from "../views/PeopleView.vue";
 import MovieView from "../views/MovieView.vue";
 import TVView from "../views/TVView.vue";
 import PersonView from "../views/PersonView.vue";
@@ -18,6 +19,11 @@ const routes = [
     path: "/",
     name: "home",
     component: HomeView,
+  },
+  {
+    path: "/people",
+    name: "people",
+    component: PeopleView,
   },
   {
     path: "/tv/on-the-air",

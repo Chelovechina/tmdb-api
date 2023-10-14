@@ -14,7 +14,7 @@
     </div>
     <div class="container wrapper">
       <AsideInfo :aside-info="store.getters.getMovieAside" />
-      <CastComponent title="Top Billed Cast" type="movie" :casts="store.getters.getTVCast" />
+      <CastComponent title="Top Billed Cast" type="movie" :casts="store.getters.getMovieCast" />
     </div>
   </div>
 </template>

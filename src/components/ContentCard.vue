@@ -1,12 +1,7 @@
 <template>
   <li class="movie__item">
-    <img
-      :src="
-        'https://image.tmdb.org/t/p/w600_and_h900_bestv2/' + item.poster_path
-      "
-      :alt="item.title"
-      class="movie__img"
-    />
+    <img :src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2/' + item.poster_path
+      " :alt="item.title" class="movie__img" />
 
     <div class="movie__info">
       <h4 class="movie__title">{{ item.title || item.name }}</h4>
@@ -16,7 +11,9 @@
 
       <div class="movie__rating">
         <h4 class="movie__title">Rating</h4>
-        <h4 class="movie__title">{{ item.vote_average.toFixed(1) }}</h4>
+        <h4 class="movie__title">
+          {{ item.vote_average.toFixed(1) }}
+        </h4>
       </div>
 
       <ProgressBar :width="item.vote_average" />

@@ -2,24 +2,14 @@
   <LoaderComponent v-if="store.state.status === 'loading'" />
   <div v-else>
     <div class="container banner__wrapper">
-      <ItemPoster
-        :image-url="
-          'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/' +
-          store.state.currentPerson.profile_path
-        "
-      />
-      <PersonInfo
-        :name="store.state.currentPerson.name"
-        :biography="store.state.currentPerson.biography"
-      />
+      <ItemPoster :image-url="'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/' +
+        store.state.currentPerson.profile_path
+        " />
+      <PersonInfo :title="store.state.currentPerson.name" :text="store.state.currentPerson.biography" />
     </div>
     <div class="container wrapper">
       <AsideInfo :aside-info="store.getters.getPersonAside" />
-      <CastComponent
-        title="Known For"
-        type="person"
-        :casts="store.getters.getPersonCast"
-      />
+      <CastComponent title="Known For" type="person" :casts="store.getters.getPersonCast" />
     </div>
   </div>
 </template>
