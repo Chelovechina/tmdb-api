@@ -2,6 +2,8 @@ import { api } from "@/api";
 
 export default {
   state: {
+    isChanged: false,
+    activeGenres: "",
     searchValue: "",
     activeSort: "popularity.desc",
     sortBy: [
@@ -19,19 +21,26 @@ export default {
   getters: {},
   mutations: {
     setSearchValue: (state, value) => {
+      state.isChanged = true;
       state.searchValue = value;
     },
     setActiveSort: (state, value) => {
+      state.isChanged = true;
       state.activeSort = value;
     },
     setGenres: (state, genres) => {
       state.genres = genres;
     },
     toggleGenreActive: (state, id) => {
+      state.isChanged = true;
       state.genres.forEach((genre) => {
-        genre.id === Number(id)
-          ? (genre.isActive = !genre.isActive)
-          : (genre.isActive = genre.isActive);
+        if (genre.id === Number(id) && !genre.isActive) {
+          genre.isActive = true;
+          state.activeGenres += `${genre.name},`;
+        } else if (genre.id === Number(id) && genre.isActive) {
+          genre.isActive = false;
+          state.activeGenres = state.activeGenres.replace(`${genre.name},`, "");
+        }
       });
     },
   },

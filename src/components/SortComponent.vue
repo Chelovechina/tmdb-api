@@ -9,13 +9,24 @@
         <GenresList />
       </div>
     </div>
+    <button :disabled="!store.state.sort.isChanged" @click="handleClick">
+      Search
+    </button>
   </div>
 </template>
 
 <script setup>
+import { useStore } from "vuex";
+
 import MyInput from "./UI/MyInput.vue";
 import MySelect from "./UI/MySelect.vue";
 import GenresList from "./UI/GenresList.vue";
+
+const store = useStore();
+
+const handleClick = () => {
+  store.dispatch("getList", "discover/movie");
+};
 </script>
 
 <style lang="scss" scoped>

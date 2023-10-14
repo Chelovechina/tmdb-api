@@ -145,15 +145,10 @@ export default createStore({
     },
   },
   actions: {
-    getList: async ({ state, commit }, type) => {
+    getList: async ({ commit }, type) => {
       try {
         commit("setStatus", "loading");
-        let response;
-
-        if (state.sort.searchValue === "") {
-          response = await api.get(type);
-        }
-
+        const response = await api.get(type);
         commit("setContentState", response.data);
         commit("setStatus", "fullfilled");
       } catch (e) {

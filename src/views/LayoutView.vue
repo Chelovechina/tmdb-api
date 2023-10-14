@@ -3,7 +3,6 @@
     <h1 class="layout__title">{{ title }}</h1>
 
     <div class="layout__wrapper">
-      <SortComponent />
       <slot></slot>
     </div>
   </div>
